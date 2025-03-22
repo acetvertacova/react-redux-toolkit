@@ -213,8 +213,8 @@ For example:
 
 Keys are necessary for React to correctly track changes in the list. This is important for optimizing the Virtual DOM's performance and preventing unnecessary re-renders. Two main rules for keys:
 
-    - Keys must be unique within the list.
-    - Keys should not change over time.
+- Keys must be unique within the list.
+- Keys should not change over time.
 
 For example: 
 
