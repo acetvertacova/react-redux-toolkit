@@ -20,20 +20,20 @@ This project provides hands-on experience with React hooks and dynamic rendering
 
 ## Project Structure
 
- src/
-  │── assets/
-  │── components/
-  │   │── Footer.jsx
-  │   │── Header.jsx
-  │   │── MenuItemCard.jsx
-  │   │── MenuItemList.jsx
-  │   │── Search.jsx
-  │   │── Slider.jsx
-  │── data/
-  │   │── menu.json
-  │── App.jsx
-  │── main.jsx
-  |── ...
+     src/
+      │── assets/
+      │── components/
+      │   │── Footer.jsx
+      │   │── Header.jsx
+      │   │── MenuItemCard.jsx
+      │   │── MenuItemList.jsx
+      │   │── Search.jsx
+      │   │── Slider.jsx
+      │── data/
+      │   │── menu.json
+      │── App.jsx
+      │── main.jsx
+      |── ...
 
 ## Usage Examples
 
@@ -41,13 +41,13 @@ This project provides hands-on experience with React hooks and dynamic rendering
 
 Displays the main title of the app ("Cafe"). Provides navigation links to jump to the 'Slider' and 'Filter' sections. This component will make it easier for users to navigate the application, especially when you want to jump between different sections like the slider or filtering options. Styled with background color, drop shadow, and transition effects for hover states.
 
-<img src="/public/header.png>
+<img src="/public/header.png">
 
 ### `Footer`
 
 Displays a copyright notice with the developer's name and GitHub link. The GitHub link opens in a new tab.Styled with a background color, shadow, and transition effects for the hover state on the link.
 
-<img src="/public/footer.png>
+<img src="/public/footer.png">
 
 
 ### `Slider`
@@ -83,13 +83,13 @@ The `Slider` component displays a menu item with navigation buttons to cycle thr
                 };
             }, []);
 ```
-<img src="/public/slider.png>
+<img src="/public/slider.png">
 
 ### `Search`
 
 The `Search` component allows users to input a search query to filter items. It calls the onSearch function when the user types in the search input.
 
-<img src="/public/search.png>
+<img src="/public/search.png">
 
 ```jsx
     const [search, setSearch] = useState(""); //useState hook to track and update the search input value
@@ -111,7 +111,7 @@ The `Search` component allows users to input a search query to filter items. It 
         </div>
     );
 ```
-<img src="/public/search-in-work.png>
+<img src="/public/search-in-work.png">
 
 
 ### `MenuItemList`
