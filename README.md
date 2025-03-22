@@ -170,7 +170,7 @@ The `MenuItemCard` component displays an individual menu item with options for s
 
 ## The Control Questions
 
-1. How to use useState for managing state? 
+1. **How to use `useState` for managing state?**
 
 The useState Hook is a built-in React Hook that allows functional components to manage state. It returns an array with two elements: the current state value and a function to update that state. State updates in useState can be done by calling the setter function. In fact, we tell React to store the value of the variable and respond to its changes by re-rendering the component.
 
@@ -180,7 +180,7 @@ The useState Hook is a built-in React Hook that allows functional components to 
 - `setState`: It is the function that is used to update the state.
 - `initialState`: It is the initial value of the state.
 
-2. How does useEffect work?
+2. **How does the `useEffect` work?**
 
 The useEffect in React is used to handle the side effects such as fetching data and updating DOM. This hook runs on every render but there is also a way of using a dependency array using which we can control the effect of rendering. The useEffect hook is vital for managing side effects in functional components.
 
@@ -198,7 +198,7 @@ The useEffect in React is used to handle the side effects such as fetching data 
 - `Cleanup function`: This optional return function cleans up side effects like subscriptions or timers when the component unmounts.
 - `Dependencies array`: React re-runs the effect if any of the values in this array change.
 
-3. Which method can be used to render lists of items in React?
+3. **Which method can be used to render lists of items in React?**
 
 To render lists in React use method `map`. The `.map()` method allows you to run a function on each item in the array, returning a new array as the result. 
 
@@ -231,10 +231,7 @@ For example:
 
 ## Source List 
 
-[useState](https://www.geeksforgeeks.org/reactjs-usestate-hook/)
-
-[useEffect](https://www.geeksforgeeks.org/reactjs-useeffect-hook/)
-
-[map()](https://www.w3schools.com/REACT/react_es6_array_methods.asp)
-
-[Git Course](https://github.com/MSU-Courses/development-of-web-application-with-react/tree/main)
+1. [useState](https://www.geeksforgeeks.org/reactjs-usestate-hook/)
+2. [useEffect](https://www.geeksforgeeks.org/reactjs-useeffect-hook/)
+3. [map()](https://www.w3schools.com/REACT/react_es6_array_methods.asp)
+4. [Git Course](https://github.com/MSU-Courses/development-of-web-application-with-react/tree/main)
