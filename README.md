@@ -181,7 +181,9 @@ In this example, the `MainLayout` component contains common interface elements, 
 
 Dynamic routing defines routes that can change based on certain parameters using route parameters or URL segments. The parameters added to the route path allow the application to handle routes dynamically and render different elements based on the URL, as you can see in the example below:
 
-    `<Route path="profile/:id" element={<Profile />} />`
+```jsx
+    <Route path="profile/:id" element={<Profile />} />
+```
 
 The Profile route with a dynamic segment `:id` matching `profile/:id`.
 
