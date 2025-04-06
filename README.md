@@ -181,9 +181,9 @@ In this example, the `MainLayout` component contains common interface elements, 
 
 Dynamic routing defines routes that can change based on certain parameters using route parameters or URL segments. The parameters added to the route path allow the application to handle routes dynamically and render different elements based on the URL, as you can see in the example below:
 
-    ```jsx
+```jsx
     <Route path="profile/:id" element={<Profile />} />
-    ```
+```
 
 The Profile route with a dynamic segment `:id` matching `profile/:id`.
 
@@ -223,25 +223,25 @@ In this example: The Layout component will wrap the `Home`, `About`, and `Contac
 
 3. **What methods can be used to validate route parameters?**
 
-    3.1. Checking if the parameter exists(!id)
-    3.2. Validating if the parameter is a number(isNaN(Number(id)))
-    3.3. Type checking(id !== 'string')
+   - Checking if the parameter exists(!id)
+   - Validating if the parameter is a number(isNaN(Number(id)))
+   - Type checking(id !== 'string')
 
 4. **How to set up a 404 page for invalid routes?**
 
-   4.1. Using the Wildcard `*` Route(path='*')
-   4.2. useNavigate hook
+   - Using the Wildcard `*` Route(path='*')
+   - useNavigate hook
 
 This is a function provided by React Router's useNavigate() hook, which is used to programmatically navigate to a different route. In this case, it's redirecting the user to the /404 page (the 404 error page).
 
-    ```jxs
-           if (!id || isNaN(Number(id))) {
-            // replace: true - the invalid URL is replaced in the browser's history.
-            // the previous invalid URL is removed from the history stack, preventing the user from returning to it with the "Back" button.
-            navigate('/404', { replace: true });
-            return null;
-          }
-    ```
+```jxs
+    if (!id || isNaN(Number(id))) {
+    // replace: true - the invalid URL is replaced in the browser's history.
+    // the previous invalid URL is removed from the history stack, preventing the user from returning to it with the "Back" button.
+    navigate('/404', { replace: true });
+    return null;
+    }
+```
 
 ## Source List 
 
