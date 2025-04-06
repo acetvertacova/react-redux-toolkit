@@ -1,4 +1,4 @@
-# Lab №4: Routing in React.
+# Lab №4: Routing in React
 
 ## Installation and Project Launch Instructions
 
