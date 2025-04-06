@@ -27,7 +27,7 @@
       "sizes": ["50ml", "100ml"]
     },
     {
-      "id": 6,
+      "id": 4,
       "name": "Cheesecake",
       "description": "Classic cheesecake with berry sauce",
       "price": 300,
@@ -36,7 +36,7 @@
       "sizes": ["150g", "200g"]
     },
     {
-      "id": 8,
+      "id": 5,
       "name": "Apple Pie",
       "description": "Homemade apple pie with cinnamon",
       "price": 280,
@@ -45,7 +45,7 @@
       "sizes": ["200g", "300g"]
     },
     {
-      "id": 10,
+      "id": 6,
       "name": "Brownie",
       "description": "Fudgy chocolate brownie",
       "price": 260,
