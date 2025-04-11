@@ -1,13 +1,13 @@
 import MenuItemList from './components/MenuItemList';
-import { Route, Routes } from 'react-router';
-import AboutPage from './components/AboutPage';
+import AboutPage from './pages/AboutPage';
 import Cart from './components/Cart';
-import ProductPage from './components/ProductPage';
+import ProductPage from './pages/ProductPage';
 import MainLayout from './layouts/MainLayout';
-import NotFoundPage from './components/NotFoundPage';
+import NotFoundPage from './pages/NotFoundPage';
+
+import { Route, Routes } from 'react-router';
 
 function App() {
-
   return (
     <Routes>
       <Route element={<MainLayout />} >
