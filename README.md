@@ -22,15 +22,22 @@ This project provides hands-on experience with React hooks and dynamic rendering
 
      src/
       │── assets/
+      │── layouts/
+      │   │── MainLayout.jsx
       │── components/
       │   │── Footer.jsx
       │   │── Header.jsx
-      │   │── MenuItemCard.jsx
-      │   │── MenuItemList.jsx
+      │   │── MenuCard.jsx
+      │   │── Menu.jsx
       │   │── Search.jsx
       │   │── Slider.jsx
       │── data/
       │   │── menu.json
+      │── pages/
+      │   │── AboutPage.jsx
+      |   │── CartPage.jsx
+      |   │── NotFoundPage.jsx
+      |   │── ProductPage.jsx
       │── App.jsx
       │── main.jsx
       |── ...

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import menuJson from "../data/menu.json";
-import MenuItemCard from "./MenuItem";
+import MenuCard from "./MenuCard";
 import Search from "./Search";
 
-export default function MenuItemList() {
+export default function Menu() {
     const [menuItems, setMenuItems] = useState([]);
     const [filteredMenuItems, setFilteredMenuItems] = useState([]);
 
@@ -21,14 +21,9 @@ export default function MenuItemList() {
     return (
 
         <div>
-            {/* {menuItems.map((menuItem) => (
-            <MenuItemCard key={menuItem.id} menuItem={menuItem} />
-        ))}    */}
-
             <Search onSearch={handleSearch} />
-
             {filteredMenuItems.map((menuItem) => (
-                <MenuItemCard key={menuItem.id} menuItem={menuItem} />
+                <MenuCard key={menuItem.id} menuItem={menuItem} />
             ))}
 
         </div>

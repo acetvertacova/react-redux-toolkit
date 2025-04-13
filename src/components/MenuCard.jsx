@@ -1,9 +1,7 @@
 import { useState } from "react"
 
-export default function MenuItemCard({ menuItem }) {
-
+export default function MenuCard({ menuItem }) {
     const [selectedSize, setSize] = useState(menuItem.sizes[0]);
-
     const handleSizeChange = (size) => {
         setSize(size);
     };

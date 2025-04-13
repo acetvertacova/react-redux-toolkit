@@ -1,18 +1,17 @@
-import MenuItemList from './components/MenuItemList';
+import Menu from './components/Menu';
 import AboutPage from './pages/AboutPage';
-import Cart from './components/Cart';
 import ProductPage from './pages/ProductPage';
-import MainLayout from './layouts/MainLayout';
+import CartPage from './pages/CartPage';
 import NotFoundPage from './pages/NotFoundPage';
-
+import MainLayout from './layouts/MainLayout';
 import { Route, Routes } from 'react-router';
 
 function App() {
   return (
     <Routes>
       <Route element={<MainLayout />} >
-        <Route index element={<MenuItemList />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route index element={<Menu />} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="*" element={<NotFoundPage />} />
