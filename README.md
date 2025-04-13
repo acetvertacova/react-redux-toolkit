@@ -33,10 +33,6 @@ The project demonstrates how to use React Router for client-side routing and com
       │── layouts/
       │   │── MainLayout.jsx
       │── components/
-      │   │── AboutPage.jsx
-      │   │── Cart.jsx
-      │   │── ProductPage.jsx
-      │   │── NotFoundPage.jsx
       │   │── Footer.jsx
       │   │── Header.jsx
       │   │── MenuCard.jsx
