@@ -59,22 +59,21 @@ The project demonstrates how to use React Router for client-side routing and com
 
 ```jsx
 
-    import MenuItemList from './components/MenuItemList';
-    import AboutPage from './components/AboutPage';
-    import Cart from './components/Cart';
-    import ProductPage from './components/ProductPage';
+    import Menu from './components/Menu';
+    import AboutPage from './pages/AboutPage';
+    import CartPage from './pages/CartPage';
+    import ProductPage from './pages/ProductPage';
     import MainLayout from './layouts/MainLayout';
-    import NotFoundPage from './components/NotFoundPage';
+    import NotFoundPage from './pages/NotFoundPage';
     
     import { Route, Routes } from 'react-router';
     
     function App() {
-    
       return (
         <Routes>
           <Route element={<MainLayout />} >
-            <Route index element={<MenuItemList />} /> // To define a default route, you can use the index attribute instead of explicitly specifying the path.
-            <Route path="/cart" element={<Cart />} />
+            <Route index element={<Menu />} /> // To define a default route, you can use the index attribute instead of explicitly specifying the path.
+            <Route path="/cart" element={<CartPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="*" element={<NotFoundPage />} />
@@ -106,15 +105,13 @@ In addition here is a validation check:
 
    ```jsx
     
-    import { useNavigate, useParams } from "react-router";
+    import { useParams } from "react-router";
     import menuJson from "../data/menu.json";
-    import MenuItemCard from "./MenuItemCard";
+    import MenuCard from "./MenuCard";
     import NotFoundPage from "./NotFoundPage";
     
     export default function ProductPage() {
-    
         const { id } = useParams();
-    
         const product = menuJson.find(product => product.id == id);
     
         if(!id || !product || isNaN(Number(id))){
@@ -122,7 +119,7 @@ In addition here is a validation check:
         }
     
         return(
-            <MenuItemCard menuItem={product}/>
+            <MenuCard menuItem={product}/>
         );
     }
     
@@ -166,8 +163,8 @@ In this example, the `MainLayout` component contains common interface elements, 
     return (
         <Routes>
           <Route element={<MainLayout />} >
-            <Route index element={<MenuItemList />} />
-            <Route path="/cart" element={<Cart />} />
+            <Route index element={<Menu />} />
+            <Route path="/cart" element={<CartPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="*" element={<NotFoundPage />} />
