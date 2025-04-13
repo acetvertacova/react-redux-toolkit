@@ -19,7 +19,6 @@ export default function Menu() {
     };
 
     return (
-
         <div>
             <Search onSearch={handleSearch} />
             {filteredMenuItems.map((menuItem) => (
