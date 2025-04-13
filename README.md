@@ -1,4 +1,4 @@
-# Lab Work №3: Hooks and Lists Rendering.
+# Lab №4: Routing in React
 
 ## Installation and Project Launch Instructions
 
@@ -14,9 +14,17 @@
 
 3. Navigate to the project folder and start the development server with `npm run dev`.
 
+### 🧭 Routing
+
+React Router is a popular library for routing in React applications. It provides convenient components and hooks for creating dynamic routes, nested routes, navigation transitions, and other features necessary for managing navigation in an application.
+
+To install the React Router library, run the following command in the terminal:
+
+    `npm i react-router`
+
 ## Lab's Description
 
-This project provides hands-on experience with React hooks and dynamic rendering of lists. You'll learn how to manage state with `useState`, `useEffect`, create reusable components, and handle user interactions in a React application. The implementation of search functionality and cart management provides a good foundation for building more complex e-commerce applications in the future.
+The project demonstrates how to use React Router for client-side routing and component-based layout structuring.
 
 ## Project Structure
 
@@ -25,6 +33,10 @@ This project provides hands-on experience with React hooks and dynamic rendering
       │── layouts/
       │   │── MainLayout.jsx
       │── components/
+      │   │── AboutPage.jsx
+      │   │── Cart.jsx
+      │   │── ProductPage.jsx
+      │   │── NotFoundPage.jsx
       │   │── Footer.jsx
       │   │── Header.jsx
       │   │── MenuCard.jsx
@@ -44,201 +56,201 @@ This project provides hands-on experience with React hooks and dynamic rendering
 
 ## Usage Examples
 
-### `Header`
+### Each route is defined using:
 
-Displays the main title of the app ("Cafe"). Provides navigation links to jump to the 'Slider' and 'Filter' sections. This component will make it easier for users to navigate the application, especially when you want to jump between different sections like the slider or filtering options. Styled with background color, drop shadow, and transition effects for hover states.
-
-<img src="/public/header.png">
-
-### `Footer`
-
-Displays a copyright notice with the developer's name and GitHub link. The GitHub link opens in a new tab.Styled with a background color, shadow, and transition effects for the hover state on the link.
-
-<img src="/public/footer.png">
-
-
-### `Slider`
-
-The `Slider` component displays a menu item with navigation buttons to cycle through items. It automatically cycles through the menu items every 3 seconds.
+- the `path` attribute — specifies the URL  
+- the `element` attribute — specifies the component that should be rendered when the route is matched
 
 ```jsx
-    const [index, setIndex] = useState(0); // useState hook to track the current menu item index
 
-    function nextMenuItem() {
-        if (index < menu.length - 1) {
-            setIndex(index + 1);
-        }
+    import MenuItemList from './components/MenuItemList';
+    import AboutPage from './components/AboutPage';
+    import Cart from './components/Cart';
+    import ProductPage from './components/ProductPage';
+    import MainLayout from './layouts/MainLayout';
+    import NotFoundPage from './components/NotFoundPage';
+    
+    import { Route, Routes } from 'react-router';
+    
+    function App() {
+    
+      return (
+        <Routes>
+          <Route element={<MainLayout />} >
+            <Route index element={<MenuItemList />} /> // To define a default route, you can use the index attribute instead of explicitly specifying the path.
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      );
     }
+    
+    export default App;
 
-    function previosMenuItem() {
-        if (index > 0) {
-            setIndex(index - 1);
-        }
-    }
-
-    let currentSlide = menu[index];
-
-    //useEffect with setInterval to handle automatic cycling
-        useEffect(() => {
-                const interval = setInterval(() => {
-                setIndex((prevIndex) => (prevIndex + 1) % menu.length);
-                }, 3000);
-            
-    //Properly cleans up the interval when the component unmounts to prevent memory leaks
-                return () => {
-                clearInterval(interval);
-                };
-            }, []);
 ```
-<img src="/public/slider.png">
 
-### `Search`
+> [!NOTE]
+> The `*` in the route path `path="*"` is a wildcard that matches any URL that doesn't match any other defined routes. This is typically used to handle 404 pages or "not found" pages.
 
-The `Search` component allows users to input a search query to filter items. It calls the onSearch function when the user types in the search input.
+### Dynamic routes
 
-<img src="/public/search.png">
+To create dynamic routes in React Router, the `:param` syntax is used, where `param` is any parameter name. This type of route allows you to extract values from the URL and use them within a component.
+
+In the example below route /product/:id is a dynamic route with parameter `id`. When navigating to the `/prosuct/3` URL, the `ProductPage` component will receive the parameter `id` with the value `3`.
+
+To retrieve parameters from the URL in a page component, the `useParams` hook from the `react-router` library is used. This hook allows you to get the values of the parameters and use them within the component.
+
+In addition here is a validation check:
+
+ - !id ensures that the id parameter exists in the URL. If the `id` is missing, it will trigger the `NotFoundPage component`.
+ - !product checks if a product was found in the menuJson based on the `id`. If no matching product is found, it displays the `NotFoundPage`.
+ - isNaN(Number(id)) converts the id to a number and checks if it is a valid number. If the `id` is not a valid number, it returns the `NotFoundPage`.
+
+   ```jsx
+    
+    import { useNavigate, useParams } from "react-router";
+    import menuJson from "../data/menu.json";
+    import MenuItemCard from "./MenuItemCard";
+    import NotFoundPage from "./NotFoundPage";
+    
+    export default function ProductPage() {
+    
+        const { id } = useParams();
+    
+        const product = menuJson.find(product => product.id == id);
+    
+        if(!id || !product || isNaN(Number(id))){
+            return <NotFoundPage />
+        }
+    
+        return(
+            <MenuItemCard menuItem={product}/>
+        );
+    }
+    
+    ```
+
+### Layout 
+
+A layout component is a wrapper that contains common elements for all pages, such as:
+    1. Header
+    2. Navigation menu
+    3. Footer
+    4. ...
+
+To create a convenient and centralized layout for all pages in a React Router application, the `Outlet` component is used. This component acts as a container for rendering nested routes, making it easy to create a common layout for all pages of the application.
+
+In this example, the `MainLayout` component contains common interface elements, such as the header and footer. The page components (MenuItemList, AboutPage, Cart, ProductPage) are dynamically rendered inside the layout component using the `Outlet` component, which serves as a container for nested routes.
+
+**MainLayout.jsx**
 
 ```jsx
-    const [search, setSearch] = useState(""); //useState hook to track and update the search input value
+    import Header from '../components/Header';
+    import Footer from '../components/Footer';
+    import { Outlet } from 'react-router';
+    
+    export default function MainLayout() {
+     return (
+       <>
+         <Header />
+         <main>
+           <Outlet />
+         </main>
+         <Footer />
+       </>
+     );
+    }
+```
 
-        const handleSearchChange = (e) => {
-            setSearch(e.target.value);
-            onSearch(e.target.value); //onSearch callback function as a prop to communicate search input changes to parent components
-        };
+**App.jsx**
 
+```jsx
     return (
-        <div className="w-full max-w-md mx-auto mt-4">
-            <input id="filter"
-                type="text"
-                placeholder="Search..."
-                onChange={handleSearchChange}
-                value={search}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow focus:outline-none focus:border-[#493D9E] text-gray-700"
-            />
-        </div>
-    );
+        <Routes>
+          <Route element={<MainLayout />} >
+            <Route index element={<MenuItemList />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      );
 ```
-<img src="/public/search-in-work.png">
 
+## ❔The Control Questions
 
-### `MenuItemList`
+1. **What are dynamic routes in React Router and how to use them?**
 
-The `MenuItemList` component displays a list of menu items with a search feature. It filters the list of menu items based on the search query provided by the user.
+Dynamic routing defines routes that can change based on certain parameters using route parameters or URL segments. The parameters added to the route path allow the application to handle routes dynamically and render different elements based on the URL, as you can see in the example below:
 
 ```jsx
+    <Route path="profile/:id" element={<Profile />} />
+```
 
-// Uses two state variables - one for the original menu items and another for the filtered results
-    const [menuItems, setMenuItems] = useState([]);
-    const [filteredMenuItems, setFilteredMenuItems] = useState([]);
+The Profile route with a dynamic segment `:id` matching `profile/:id`.
 
-// Loads menu data from a JSON file and initializes both state variables with this data when the component mounts
-    useEffect(() => {
-        setMenuItems(menuJson);
-        setFilteredMenuItems(menuJson);
-      }, []);
+2. **How to implement layout components in an application with routing?**
 
-// Implements a handleSearch function that filters menu items based on the user's search query, matching item names case-insensitively
-      const handleSearch = (query) => {
-        setFilteredMenuItems(menuItems.filter(item => {
-            return item.name.toLowerCase().includes(query.toLowerCase())
-        }));
-      };
+React layout components are reusable parts that specify your application's skeleton or structure. Consistently placed headers, sidebars, footers, and navigation bars are examples of layout components. When working with layouts, React Router’s `Outlet` is especially important. The Outlet component is a placeholder in your layout where the matched child route components will be rendered. 
 
-      return(
+In this example: The Layout component will wrap the `Home`, `About`, and `Contact` pages. Inside the Layout component, we use the `Outlet` component as a placeholder for the route-specific content.
 
+```jsx
     <div>
-        <Search onSearch={handleSearch} />
-        {filteredMenuItems.map((menuItem) => (
-            <MenuItemCard key={menuItem.id} menuItem={menuItem} />
-        ))}
-
-    </div>
-    )
+          <header>My App Header</header>
+          <nav>Navigation Bar</nav>
+          <main>
+            <Outlet /> {/* Content specific to the route will be rendered here */}
+          </main>
+          <footer>My App Footer</footer>
+        </div>
 ```
-
-### `MenuItemCard`
-
-The `MenuItemCard` component displays an individual menu item with options for selecting a size and adding it to the cart. It shows the item’s image, name, description, price, and available sizes.
 
 ```jsx
-// Accepts a menuItem object containing item details like name, image, description, price, and sizes
-    export default function MenuItemCard({ menuItem }) {
-
-// useState to track the selected size, defaulting to the first size in the array
-    const [selectedSize, setSize] = useState(menuItem.sizes[0]); 
-
-// Implements handleSizeChange function to update the selected size when a size button is clicked
-    const handleSizeChange = (size) => {
-        setSize(size);
-    };
-...
-
+    function App() {
+      return (
+        <Router>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="about" element={<About />} />
+              <Route path="contact" element={<Contact />} />
+            </Route>
+          </Routes>
+        </Router>
+      );
+    }
 ```
 
-## The Control Questions
 
-1. **How to use `useState` for managing state?**
+3. **What methods can be used to validate route parameters?**
 
-The useState Hook is a built-in React Hook that allows functional components to manage state. It returns an array with two elements: the current state value and a function to update that state. State updates in useState can be done by calling the setter function. In fact, we tell React to store the value of the variable and respond to its changes by re-rendering the component.
+   - Checking if the parameter exists(!id)
+   - Validating if the parameter is a number(isNaN(Number(id)))
+   - Type checking(id !== 'string')
 
-`const [state, setState] = useState(initialState)`
+4. **How to set up a 404 page for invalid routes?**
 
-- `state`: It is the value of the current state.
-- `setState`: It is the function that is used to update the state.
-- `initialState`: It is the initial value of the state.
+   - Using the Wildcard `*` Route(path='*')
+   - useNavigate hook
 
-2. **How does the `useEffect` work?**
-
-The useEffect in React is used to handle the side effects such as fetching data and updating DOM. This hook runs on every render but there is also a way of using a dependency array using which we can control the effect of rendering. The useEffect hook is vital for managing side effects in functional components.
-
-``` 
-    useEffect(() => {
-        // Side effect logic goes here
-        return () => {
-            // Cleanup logic (optional)
-    };
-    }, [dependencies]);
-
-```
-
-- `Effect function`: This is where your side effect code runs.
-- `Cleanup function`: This optional return function cleans up side effects like subscriptions or timers when the component unmounts.
-- `Dependencies array`: React re-runs the effect if any of the values in this array change.
-
-3. **Which method can be used to render lists of items in React?**
-
-To render lists in React use method `map`. The `.map()` method allows you to run a function on each item in the array, returning a new array as the result. 
-
-For example: 
+This is a function provided by React Router's useNavigate() hook, which is used to programmatically navigate to a different route. In this case, it's redirecting the user to the /404 page (the 404 error page).
 
 ```jxs
-    const myArray = ['apple', 'banana', 'orange'];
-    const myList = myArray.map((item) => <p>{item}</p>)
-```
-
-**Key usage:** 
-
-Keys are necessary for React to correctly track changes in the list. This is important for optimizing the Virtual DOM's performance and preventing unnecessary re-renders. Two main rules for keys:
-
-- Keys must be unique within the list.
-- Keys should not change over time.
-
-For example: 
-
-```jsx
-    const languages = ['English', 'Spanish', 'Romanian'];
-
-    <ul>
-        {frameworks.map((framework) => (
-          <li key={framework}>{framework}</li>
-        ))}
-    </ul>
-
+    if (!id || isNaN(Number(id))) {
+    // replace: true - the invalid URL is replaced in the browser's history.
+    // the previous invalid URL is removed from the history stack, preventing the user from returning to it with the "Back" button.
+    navigate('/404', { replace: true });
+    return null;
+    }
 ```
 
 ## Source List 
 
-1. [useState](https://www.geeksforgeeks.org/reactjs-usestate-hook/)
-2. [useEffect](https://www.geeksforgeeks.org/reactjs-useeffect-hook/)
-3. [map()](https://www.w3schools.com/REACT/react_es6_array_methods.asp)
-4. [Git Course](https://github.com/MSU-Courses/development-of-web-application-with-react/tree/main)
+1. [Dynamic route](https://www.freecodecamp.org/news/relative-vs-dynamic-routing-in-react/)
+2. [Layout](https://dev.to/jps27cse/understanding-layout-components-and-react-router-outlet-in-react-3l2e)
+3. [404 page](https://naveenda.medium.com/how-to-creating-a-custom-404-page-with-react-routers-v6-52efe2cd3807)
+4. [Git Course](https://github.com/MSU-Courses/development-of-web-application-with-react/blob/main/07_Routing/07_02_Routing_In_React.md)
