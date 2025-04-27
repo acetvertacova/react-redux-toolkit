@@ -1,30 +1,26 @@
-import { useState, useEffect } from "react";
-import menuJson from "../data/menu.json";
+import { useEffect } from "react";
 import MenuCard from "./MenuCard";
-import Search from "./Search";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMenu } from "../store/menu/actions";
 
 export default function Menu() {
-    const [menuItems, setMenuItems] = useState([]);
-    const [filteredMenuItems, setFilteredMenuItems] = useState([]);
+    const { status, error } = useSelector(state => state.menu);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        setMenuItems(menuJson);
-        setFilteredMenuItems(menuJson);
-    }, []);
+        dispatch(fetchMenu());
+    }, [dispatch]);
 
-    const handleSearch = (query) => {
-        setFilteredMenuItems(menuItems.filter(item => {
-            return item.name.toLowerCase().includes(query.toLowerCase())
-        }));
-    };
+    const menu = useSelector(state => state.menu.menu);
 
     return (
         <div>
-            <Search onSearch={handleSearch} />
-            {filteredMenuItems.map((menuItem) => (
-                <MenuCard key={menuItem.id} menuItem={menuItem} />
-            ))}
+            {status === 'loading' && <h2>Loading...</h2>}
+            {error && <h2>An error occured: {error}</h2>}
 
+            {menu.map((item) => (
+                <MenuCard key={item.id} menuItem={item} />
+            ))}
         </div>
     )
 }

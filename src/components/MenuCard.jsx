@@ -1,9 +1,23 @@
 import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../store/cart/slice";
 
 export default function MenuCard({ menuItem }) {
     const [selectedSize, setSize] = useState(menuItem.sizes[0]);
     const handleSizeChange = (size) => {
         setSize(size);
+    };
+    const dispatch = useDispatch();
+
+    const handleAdd = () => {
+        dispatch(addToCart({
+            id: menuItem.id,
+            name: menuItem.name,
+            price: menuItem.price,
+            size: selectedSize,
+            totalPrice: menuItem.price,
+        }));
+
     };
 
     return (
@@ -23,7 +37,7 @@ export default function MenuCard({ menuItem }) {
                     </button>
                 ))}
             </div>
-            <button className="px-6 py-2 bg-[#493D9E] text-white rounded-lg shadow hover:bg-[#B2A5FF]">
+            <button onClick={handleAdd} className="px-6 py-2 bg-[#493D9E] text-white rounded-lg shadow hover:bg-[#B2A5FF]">
                 Add to cart
             </button>
         </div>
