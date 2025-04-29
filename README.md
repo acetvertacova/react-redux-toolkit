@@ -172,10 +172,10 @@ removeFromCart(state, action) {
 
 <img src='/src/assets/increaseItemInCart.png'>
 
-    - `handleDecreaseItem(item)`
+-`handleDecreaseItem(item)`
         - Decreases the quantity of a specific item in the cart by 1. If the quantity becomes 1, the item is removed from the cart.
 
-        ```jsx
+    ```jsx
         const handleDecreaseItem = (item) => {
         if (item.quantity > 1) {
             dispatch(updateQuantity({
@@ -187,7 +187,7 @@ removeFromCart(state, action) {
             handleDelete(item);
         }
         }
-        ```
+    ```
 
 <img src='/src/assets/descreaseItemInCart.png'>
 
