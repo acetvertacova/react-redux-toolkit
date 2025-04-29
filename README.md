@@ -389,7 +389,7 @@ A **slice** is a concept representing a distinct part of the global state along 
 
 ## Source List 
 
-1. [Git Course](https://github.com/MSU-Courses/development-of-web-application-with-react/blob/main/07_Routing/07_02_Routing_In_React.md)
+1. [Git Course](https://github.com/MSU-Courses/development-of-web-application-with-react/tree/main/11_Global_Store)
 2. [Redux Toolkit](https://medium.com/@shaheermansoor321/understanding-redux-and-redux-toolkit-a-comprehensive-guide-04c63511f3fb#:~:text=Redux%20is%20a%20state%20management,location%20in%20the%20component%20tree.)
 3. [Slices](https://redux-toolkit.js.org/api/createSlice)
 
