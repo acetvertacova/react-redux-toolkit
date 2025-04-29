@@ -49,3 +49,5 @@ export const addMenuItem = createAsyncThunk('menu/addMenuItem',
         }
     }
 )
+
+export const selectMenu = state => state.menu.menu;

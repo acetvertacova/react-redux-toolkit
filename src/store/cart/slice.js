@@ -41,14 +41,10 @@ const cartSlice = createSlice({
                 (item) => item.id === action.payload.id && item.size === action.payload.size
             );
 
-            if (findItemToDelete.quantity == 1) {
-                state.items = state.items.filter(
-                    (item) => item.id != action.payload.id || item.size != action.payload.size
-                );
-            } else {
-                findItemToDelete.quantity--;
-                findItemToDelete.totalPrice -= findItemToDelete.price;
-            }
+            state.items = state.items.filter(
+                (item) => item.id != action.payload.id || item.size != action.payload.size
+            );
+
             setItem(state.items.map(item => item));
         },
         updateQuantity(state, action) {

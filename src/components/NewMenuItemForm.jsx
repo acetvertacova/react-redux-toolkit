@@ -1,6 +1,6 @@
 import { useFieldArray, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import schema from "../validation/menu.scema";
+import schema from "../validation/menu.schema";
 import { useDispatch } from "react-redux";
 import { addMenuItem } from "../store/menu/actions";
 import { useNavigate } from "react-router";

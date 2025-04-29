@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import MenuCard from "./MenuCard";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMenu } from "../store/menu/actions";
+import { fetchMenu, selectMenu } from "../store/menu/actions";
+import MenuCard from "./MenuCard";
 
 export default function Menu() {
     const { status, error } = useSelector(state => state.menu);
@@ -11,7 +11,7 @@ export default function Menu() {
         dispatch(fetchMenu());
     }, [dispatch]);
 
-    const menu = useSelector(state => state.menu.menu);
+    const menu = useSelector(selectMenu);
 
     return (
         <div>

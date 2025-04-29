@@ -14,7 +14,7 @@ export default function CartPage() {
         }));
     }
 
-    const handlePlus = (item) => {
+    const handleIncreaseItem = (item) => {
         const quant = dispatch(updateQuantity({
             id: item.id,
             size: item.size,
@@ -22,7 +22,7 @@ export default function CartPage() {
         }));
     }
 
-    const handleMinus = (item) => {
+    const handleDecreaseItem = (item) => {
         if (item.quantity > 1) {
             dispatch(updateQuantity({
                 id: item.id,
@@ -35,19 +35,38 @@ export default function CartPage() {
     }
 
     return (
-        <>
-            <ul>
+        <div className="form-container">
+            <ul className="list">
                 {items.map((item) => (
-                    <div key={`${item.id}-${item.size}`}>
-                        <li> {item.name} — {item.size} — ${item.price} x {item.quantity}</li>
-                        <button onClick={() => handleDelete(item)}>Delete</button>
-                        <button onClick={() => handlePlus(item)}>+</button>
-                        <button onClick={() => handleMinus(item)}>-</button>
+                    <div key={`${item.id}-${item.size}`} className="list-item">
+                        <li className="flex justify-between items-center bg-white border border-indigo-700 rounded-lg p-4 mb-3 shadow-sm">
+                            <div>
+                                <div className="font-semibold text-lg text-indigo-900">{item.name}</div>
+                                <div className="text-sm text-gray-600">Size: {item.size}</div>
+                                <div className="text-sm text-gray-600">${item.price} × {item.quantity}</div>
+                                <div className="text-sm text-gray-600">Total price: {item.totalPrice}</div>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                                <button
+                                    onClick={() => handleDecreaseItem(item)}
+                                    className="px-3 py-1 bg-indigo-700 text-white rounded hover:bg-indigo-500"
+                                >–</button>
+                                <button
+                                    onClick={() => handleIncreaseItem(item)}
+                                    className="px-3 py-1 bg-indigo-700 text-white rounded hover:bg-indigo-500"
+                                >+</button>
+                                <button
+                                    onClick={() => handleDelete(item)}
+                                    className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-300"
+                                >Delete</button>
+                            </div>
+                        </li>
                     </div>
                 ))}
             </ul>
 
-            <Link to='/'>Back</Link>
-        </>
+            <Link to='/' className="link">Back</Link>
+        </div>
     );
 }

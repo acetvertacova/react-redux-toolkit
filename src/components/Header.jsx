@@ -10,10 +10,10 @@ export default function Header() {
             <h1 className="text-4xl font-bold text-[#C5BAFF] mb-4 drop-shadow-lg">Cafe</h1>
             <ul className="flex justify-center gap-8 text-lg font-medium">
                 <li>
-                    <Link to='/cart'>Cart ({N})</Link>
+                    <Link to='/cart' className="link">Cart ({N})</Link>
                 </li>
                 <li>
-                    <Link to='/create'>Create menu item</Link>
+                    <Link to='/create' className="link">Create menu item</Link>
                 </li>
             </ul>
         </header>

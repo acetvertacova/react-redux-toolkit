@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addMenuItem, fetchMenu } from './actions';
+import { fetchMenu } from './actions';
 
 const menuSlice = createSlice({
     name: 'menu',
