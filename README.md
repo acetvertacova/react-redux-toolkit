@@ -1,4 +1,4 @@
-# Lab №6:
+# Lab №6: React Redux Toolkit
 
 ## Installation and Project Launch Instructions
 
